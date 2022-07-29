@@ -1,7 +1,7 @@
 on: [push]
 
 jobs:
-  hello_world_job:
+  spectaql_job:
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
@@ -13,3 +13,8 @@ jobs:
     # Use the output from the `hello` step
     - name: Get the output time
       run: echo "The time was ${{ steps.hello.outputs.time }}"
+
+    - name: Build GraphQL static docs
+      run: |
+        npx spectaql config.yml
+      shell: bash
