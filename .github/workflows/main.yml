@@ -2,19 +2,43 @@ on: [push]
 
 jobs:
   spectaql_job:
+    name: Run the command
     runs-on: ubuntu-latest
-    name: A job to say hello
     steps:
-    - name: Hello world action step
-      id: hello
-      uses: billCaplan/specatql-action@v2
-      with:
-        who-to-greet: 'Bill C'
-    # Use the output from the `hello` step
-    - name: Get the output time
-      run: echo "The time was ${{ steps.hello.outputs.time }}"
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - run: npx spectaql ./spectaqlConfig/config.spectaql.yml
+    
+    
+    
+    
 
-    - name: Build GraphQL static docs
-      run: |
-        npx spectaql config.yml
-      shell: bash
+    
+    #steps:
+   # - name: Hello world action step
+     # id: hello
+#      uses: billCaplan/specatql-action@v2
+ #     with:
+      #input to the action index.js which runs as part of this step
+ #       who-to-greet: 'Bill C'
+    # Use the output from the `hello` step
+   # - name: Get the output time#
+    #  run: echo "The time was ${{ steps.hello.outputs.time }}"
+
+#    - name: Build GraphQL static docs
+   #   run: |
+      #  npx spectaql ./spectaqlConfig/config.spectaql.yml
+    #  shell: bash
+   #
+   # - name: Update the docs with the new index.html
+  #    run: |
+   #   git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com/project target
+   #  rm everything but the .git directory
+   #  copy source\files target
+  #    cd target
+  #    git add .
+  #    git diff-index --quiet HEAD || git commit -m "Automatic publish from github.com/project"
+  #    git push target master
+    
